@@ -78,6 +78,10 @@ Requires Go ≥ 1.24 (module deps download on first build).
    `http_requests_total{service=…,method=…,route=…,status=…}` incrementing and
    `http_request_duration_seconds_bucket{…}` histogram rows. It is exactly the
    text format Prometheus scrapes.
+4. **Centralized logging (ELK).** The JSON lines are already in the shape an
+   ELK pipeline wants — see [docs/elk-pipeline.md](docs/elk-pipeline.md) for
+   the Filebeat → Elasticsearch → Kibana path, a ready-to-adapt Filebeat
+   config, and the KQL query that finds one request's logs by `trace_id`.
 
 Sample trace (abridged, real output looks like this):
 
@@ -104,5 +108,6 @@ cmd/frontend/main.go        # :8081  POST /order, starts trace, calls backend
 cmd/backend/main.go         # :8082  POST /process, child span, simulated work
 internal/telemetry/         # OTel SDK (stdout) + JSON logger w/ trace correlation
 internal/metrics/           # hand-rolled Prometheus exposition registry
+docs/elk-pipeline.md        # centralized logging: Filebeat -> Elasticsearch -> Kibana
 run.sh                      # build + run both + fire one request
 ```
