@@ -8,7 +8,7 @@ When software runs as several small services, three questions matter:
 
 1. **Logs** — *"What happened?"* A running diary of events. Here every line is
    one JSON object, so machines (and people) can search and filter it.
-2. **Metrics** — *"How much / how fast?"* Numbers over time: request counts,
+2. **Metrics (real-time monitoring)** — *"How much / how fast?"* Numbers over time: request counts,
    error rates, latencies. Exposed here in the Prometheus format that most
    monitoring tools scrape.
 3. **Traces** — *"Where did one request go?"* A request often crosses service
